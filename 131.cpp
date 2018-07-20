@@ -39,7 +39,7 @@ vector<vector<string>> partition(string s) {
     return v;
 }
 
-int main() {
-    vector<vector<string>> p = partition("aabbb8998");
-    cout << "a";
-}
+//int main() {
+//    vector<vector<string>> p = partition("aabbb8998");
+//    cout << "a";
+//}
