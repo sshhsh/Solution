@@ -5,11 +5,16 @@
 #include <regex>
 #include <iostream>
 #include <vector>
+#include <sstream>
 #include "stdlib.h"
 
 using namespace std;
 
 int gcd(int x, int y) {
+    if (x < 0)
+        x = -x;
+    if (y < 0)
+        y = -y;
     int z = y;
     while (x % y != 0) {
         z = x % y;
@@ -23,7 +28,7 @@ string fractionAddition(string expression) {
     vector<int> m;
     vector<int> n;
     string::size_type pos = 0;
-    regex re(R"([\+]?(-?\d)/(\d))");
+    regex re(R"([\+]?(-?\d+)/(\d+))");
     sregex_iterator it(expression.begin(), expression.end(), re);
     sregex_iterator end;
 
@@ -34,11 +39,23 @@ string fractionAddition(string expression) {
         m.push_back(atoi(c));
         strcpy(c, it->str(2).c_str());
         n.push_back(atoi(c));
-        cout << atoi(c) << endl;
+//        cout << atoi(c) << endl;
+        mul *= n.back();
     }
-    return "A";
+
+    int sum = 0;
+    for (int i = 0; i < m.size(); ++i) {
+        sum += mul / n[i] * m[i];
+    }
+
+    int g = gcd(sum, mul);
+
+    stringstream str;
+    str << sum / g << "/" << mul / g;
+
+    return str.str();
 }
 
 int main() {
-    fractionAddition("-1/2+1/2+1/3");
+    cout << fractionAddition("-5/2+10/3+7/9");
 }
