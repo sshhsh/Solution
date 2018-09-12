@@ -14,19 +14,19 @@ int uniqueLetterString(string S) {
         i = -1;
     for (int &i : middle)
         i = -1;
-    for(int i = 0; i<S.length(); ++i){
-        sum += (i-middle[S[i]-'A'])*(middle[S[i]-'A']-left[S[i]-'A']);
-        left[S[i]-'A'] = middle[S[i]-'A'];
-        middle[S[i]-'A'] = i;
+    for (int i = 0; i < S.length(); ++i) {
+        sum += (i - middle[S[i] - 'A']) * (middle[S[i] - 'A'] - left[S[i] - 'A']);
+        left[S[i] - 'A'] = middle[S[i] - 'A'];
+        middle[S[i] - 'A'] = i;
     }
 
-    for(int i =0;i<26;++i){
-        sum += (S.length()-middle[i])*(middle[i]-left[i]);
+    for (int i = 0; i < 26; ++i) {
+        sum += (S.length() - middle[i]) * (middle[i] - left[i]);
     }
-    return sum%1000000007;
+    return sum % 1000000007;
 }
 
-int main(){
+int main() {
     int res = uniqueLetterString("ABIQWGIQWGRIQUBFUASBFIASUDHOIWQNFOIWHFOIASFOIHWIHFOANFIA");
     cout << res;
 }
